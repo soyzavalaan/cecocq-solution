@@ -11,7 +11,137 @@
             }
             body {
                 margin: 0;
-                padding: 20px;
+                padding: 10px;
+                font-size: 11px;
+                line-height: 1.3;
+            }
+            .container {
+                padding: 15px;
+                box-shadow: none;
+            }
+            .header {
+                padding-bottom: 10px;
+                margin-bottom: 15px;
+                border-bottom: 2px solid #2c3e50;
+            }
+            .company-name {
+                font-size: 20px;
+                margin-bottom: 2px;
+            }
+            .tagline {
+                font-size: 10px;
+            }
+            h1 {
+                font-size: 16px;
+                margin: 8px 0;
+            }
+            h2 {
+                font-size: 14px;
+                margin: 12px 0 8px 0;
+                padding-bottom: 4px;
+            }
+            h3 {
+                font-size: 12px;
+                margin: 8px 0 5px 0;
+            }
+            .meta-info {
+                padding: 8px;
+                gap: 8px;
+                margin: 10px 0;
+                font-size: 10px;
+            }
+            .diagnostico {
+                display: none;
+            }
+            .option-card {
+                padding: 12px;
+                margin: 12px 0;
+                page-break-inside: avoid;
+            }
+            .option-header {
+                margin-bottom: 8px;
+            }
+            .option-title {
+                font-size: 13px;
+            }
+            .price {
+                font-size: 18px;
+            }
+            .badge {
+                padding: 2px 8px;
+                font-size: 9px;
+            }
+            .feature-list {
+                margin: 8px 0;
+            }
+            .feature-list li {
+                padding: 3px 0;
+                padding-left: 20px;
+                font-size: 10px;
+            }
+            .feature-list li::before {
+                font-size: 14px;
+            }
+            .feature-list ul {
+                display: none;
+            }
+            .delivery-time {
+                padding: 5px;
+                margin: 8px 0;
+                font-size: 10px;
+            }
+            .ideal-for {
+                padding: 5px;
+                margin: 5px 0;
+                font-size: 9px;
+            }
+            .conditions {
+                padding: 12px;
+                margin: 12px 0;
+                font-size: 10px;
+            }
+            .conditions h3 {
+                font-size: 11px;
+                margin-top: 8px;
+            }
+            .conditions ul {
+                margin: 5px 0 0 15px;
+            }
+            .conditions ul li {
+                margin: 2px 0;
+            }
+            .recommendation-box {
+                padding: 12px;
+                margin: 12px 0;
+                font-size: 10px;
+            }
+            .recommendation-box ol {
+                margin: 8px 0 0 15px;
+            }
+            .recommendation-box ol li {
+                margin: 2px 0;
+            }
+            .contact-info {
+                padding: 10px;
+                margin: 10px 0;
+                font-size: 10px;
+            }
+            .contact-info h3 {
+                font-size: 12px;
+                margin-top: 0;
+            }
+            .contact-info p {
+                margin: 5px 0;
+            }
+            .note {
+                font-size: 9px;
+                padding: 8px;
+                margin-top: 10px;
+            }
+            .footer {
+                margin-top: 15px;
+                padding-top: 10px;
+                font-size: 9px;
             }
         }
         
@@ -322,6 +452,7 @@
             <h3>Alcance del servicio:</h3>
             <ul class="feature-list">
                 <li>Actualización de WordPress core y plugins esenciales</li>
+                <li>Actualización de elementos de seguridad (firewall, anti-malware)</li>
                 <li>Implementación de plugin de reservaciones (Bookly/Amelia básico)</li>
                 <li>Configuración de calendario compartido para citas</li>
                 <li>Integración básica con página de Servicios</li>
@@ -427,7 +558,7 @@
                 <li>Redacción de contenidos nuevos (textos)</li>
                 <li>Fotografía profesional</li>
                 <li>Certificados SSL premium (se cotiza por separado si se requiere)</li>
-                <li>Mantenimiento mensual posterior (se cotiza por separado)</li>
+                <li>Mantenimiento mensual posterior (ver plan de mantenimiento a continuación)</li>
             </ul>
             
             <h3>Garantía:</h3>
@@ -450,13 +581,37 @@
             <p style="margin-top: 15px;">La Opción 1, si bien soluciona la necesidad de reservaciones, deja pendientes aspectos críticos de seguridad y modernización que eventualmente requerirán atención.</p>
         </div>
         
+        <div class="option-card" style="background: #f0f8ff; border-color: #3498db;">
+            <div class="option-header">
+                <div class="option-title">💼 PLAN DE MANTENIMIENTO MENSUAL (Opcional)</div>
+                <div class="price" style="color: #3498db;">$1,200 MXN/mes</div>
+            </div>
+            
+            <h3>Servicios incluidos:</h3>
+            <ul class="feature-list">
+                <li>Actualizaciones mensuales de WordPress, tema y plugins</li>
+                <li>Monitoreo de seguridad y escaneo de malware</li>
+                <li>Backup semanal automático del sitio completo</li>
+                <li>Optimización de base de datos mensual</li>
+                <li>Monitoreo de uptime (disponibilidad del sitio)</li>
+                <li>Reporte mensual de estadísticas y rendimiento</li>
+                <li>Soporte técnico prioritario vía email (respuesta en 24hrs)</li>
+                <li>1 hora de modificaciones menores al mes (textos, imágenes)</li>
+            </ul>
+            
+            <div class="ideal-for">💡 Recomendado para: Mantener el sitio seguro, actualizado y funcionando óptimamente sin preocupaciones</div>
+            
+            <p style="margin-top: 15px; font-size: 13px;"><strong>Nota:</strong> Sin contrato de permanencia. Cancelación con 30 días de anticipación.</p>
+        </div>
+        
         <div class="contact-info">
             <h3>📞 INFORMACIÓN DE CONTACTO</h3>
             <p>Para aceptar esta cotización o resolver dudas:</p>
             <p style="margin-top: 15px;">
                 <strong>Empresa:</strong> Fezavali SofSol<br>
-                <strong>Teléfono:</strong> 55 1835 6764<br>
-                <strong>Email:</strong> fer.zavli@gmail.com<br>
+                <strong>Teléfono:</strong> [Tu teléfono]<br>
+                <strong>Email:</strong> [Tu email]<br>
+                <strong>Horario:</strong> Lunes a Viernes, 9:00 - 18:00 hrs
             </p>
         </div>
         
@@ -465,8 +620,8 @@
         </div>
         
         <div class="footer">
-            <p><strong>Fezavali SofSol</strong> - Soluciones en Desarrollo Web</p>
-            <p style="font-size: 12px; color: #999; margin-top: 10px;">Gracias por considerar nuestros servicios para soluciones de software.</p>
+            <p><strong>Fezavali SofSol</strong> - Soluciones Profesionales en Desarrollo Web</p>
+            <p style="font-size: 12px; color: #999; margin-top: 10px;">Gracias por considerar nuestros servicios profesionales.</p>
         </div>
     </div>
 </body>
