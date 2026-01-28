@@ -4,8 +4,690 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cotización - CECOCQ | Fezavali SofSol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* ========== SISTEMA DE PESTAÑAS ========== */
+        .tabs-container {
+            max-width: 900px;
+            margin: 0 auto 20px;
+            background: white;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .tabs-nav {
+            display: flex;
+            background: #2c3e50;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        
+        .tabs-nav li {
+            flex: 1;
+        }
+        
+        .tabs-nav button {
+            width: 100%;
+            padding: 18px 20px;
+            border: none;
+            background: transparent;
+            color: rgba(255,255,255,0.7);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .tabs-nav button:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        
+        .tabs-nav button.active {
+            background: white;
+            color: #2c3e50;
+        }
+        
+        .tabs-nav button .tab-icon {
+            font-size: 20px;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* ========== ESTILOS PESTAÑA WHATSAPP ========== */
+        .whatsapp-tab {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8f4 100%);
+            padding: 2rem;
+        }
+        
+        .whatsapp-tab .wa-header {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-tab .wa-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            border: none;
+            color: white;
+        }
+        
+        .whatsapp-tab .wa-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+        
+        .whatsapp-tab .wa-intro {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #25d366;
+        }
+        
+        .whatsapp-tab .wa-intro h3 {
+            color: #128c7e;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .whatsapp-tab .wa-intro p {
+            font-size: 1.05rem;
+            color: #4a5568;
+            line-height: 1.8;
+            margin-bottom: 0.8rem;
+        }
+        
+        .whatsapp-tab .wa-option {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .whatsapp-tab .wa-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .whatsapp-tab .wa-badge {
+            position: absolute;
+            top: -12px;
+            right: 25px;
+            background: #ff6b6b;
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+        
+        .whatsapp-tab .wa-option-header {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+        
+        .whatsapp-tab .wa-icon {
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        
+        .whatsapp-tab .wa-option-title h4 {
+            font-size: 1.4rem;
+            color: #128c7e;
+            margin-bottom: 0.2rem;
+        }
+        
+        .whatsapp-tab .wa-option-title .wa-tagline {
+            color: #718096;
+            font-size: 0.95rem;
+        }
+        
+        .whatsapp-tab .wa-price-box {
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin: 1.2rem 0;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .whatsapp-tab .wa-price-main {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #128c7e;
+            margin-bottom: 0.3rem;
+        }
+        
+        .whatsapp-tab .wa-price-detail {
+            color: #718096;
+            font-size: 0.95rem;
+        }
+        
+        .whatsapp-tab .wa-benefits {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        
+        .whatsapp-tab .wa-benefits li {
+            padding: 0.7rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #4a5568;
+            font-size: 0.98rem;
+            border-bottom: 1px solid #f7fafc;
+        }
+        
+        .whatsapp-tab .wa-benefits li:last-child {
+            border-bottom: none;
+        }
+        
+        .whatsapp-tab .wa-benefits li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #25d366;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+        
+        .whatsapp-tab .wa-analogy {
+            background: #fff3cd;
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-top: 1.2rem;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .whatsapp-tab .wa-analogy p {
+            color: #856404;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+        
+        .whatsapp-tab .wa-comparison {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .whatsapp-tab .wa-comparison h3 {
+            color: #128c7e;
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .whatsapp-tab .wa-comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+        }
+        
+        .whatsapp-tab .wa-comparison-item {
+            background: linear-gradient(135deg, #f7fafc, white);
+            padding: 1.2rem;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            text-align: center;
+        }
+        
+        .whatsapp-tab .wa-comparison-item.highlight {
+            border-color: #25d366;
+            background: linear-gradient(135deg, #e6f7ed, white);
+        }
+        
+        .whatsapp-tab .wa-comparison-item h4 {
+            color: #128c7e;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .whatsapp-tab .wa-comparison-item .big-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #25d366;
+            margin: 0.8rem 0;
+        }
+        
+        .whatsapp-tab .wa-comparison-item p {
+            color: #718096;
+            font-size: 0.85rem;
+        }
+        
+        .whatsapp-tab .wa-faq {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .whatsapp-tab .wa-faq h3 {
+            color: #128c7e;
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .whatsapp-tab .wa-faq-item {
+            margin-bottom: 1.2rem;
+            padding: 1.2rem;
+            background: #f7fafc;
+            border-radius: 12px;
+            border-left: 4px solid #25d366;
+        }
+        
+        .whatsapp-tab .wa-faq-item h4 {
+            color: #2d3748;
+            font-size: 1.05rem;
+            margin-bottom: 0.6rem;
+        }
+        
+        .whatsapp-tab .wa-faq-item p {
+            color: #4a5568;
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        
+        .whatsapp-tab .wa-timeline {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .whatsapp-tab .wa-timeline h3 {
+            color: #128c7e;
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .whatsapp-tab .wa-timeline-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+        
+        .whatsapp-tab .wa-timeline-step {
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .whatsapp-tab .wa-timeline-step::after {
+            content: '→';
+            position: absolute;
+            right: -1rem;
+            top: 30%;
+            color: #25d366;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .whatsapp-tab .wa-timeline-step:last-child::after {
+            content: '';
+        }
+        
+        .whatsapp-tab .wa-timeline-number {
+            width: 50px;
+            height: 50px;
+            background: #25d366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 0.8rem;
+        }
+        
+        .whatsapp-tab .wa-timeline-step p {
+            color: #4a5568;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .whatsapp-tab .wa-cta {
+            background: linear-gradient(135deg, #128c7e, #075e54);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(18, 140, 126, 0.3);
+        }
+        
+        .whatsapp-tab .wa-cta h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            color: white;
+        }
+        
+        .whatsapp-tab .wa-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+            line-height: 1.7;
+        }
+        
+        .whatsapp-tab .wa-cta .highlight-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+        }
+        
+        /* ========== ESTILOS PESTAÑA DESGLOSE COSTOS ========== */
+        .desglose-tab {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            background: #f8fafc;
+            padding: 2rem;
+        }
+        
+        .desglose-tab .desglose-header {
+            background: linear-gradient(135deg, #0f766e, #14b8a6);
+            color: white;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 40px rgba(15, 118, 110, 0.2);
+        }
+        
+        .desglose-tab .desglose-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            border: none;
+            color: white;
+        }
+        
+        .desglose-tab .desglose-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+        
+        .desglose-tab .breakdown-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border-left: 5px solid #14b8a6;
+        }
+        
+        .desglose-tab .breakdown-card h3 {
+            color: #0f766e;
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .desglose-tab .cost-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #f1f5f9;
+        }
+        
+        .desglose-tab .cost-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .desglose-tab .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(135deg, #f0fdfa, #ccfbf1);
+            padding: 1.2rem;
+            border-radius: 12px;
+            border-left: 4px solid #14b8a6;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .desglose-tab .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0f766e;
+        }
+        
+        .desglose-tab .section-price {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #14b8a6;
+        }
+        
+        .desglose-tab .cost-items {
+            display: grid;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        
+        .desglose-tab .cost-item {
+            background: #f8fafc;
+            padding: 1.2rem;
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1rem;
+            align-items: center;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .desglose-tab .cost-item:hover {
+            border-color: #14b8a6;
+            transform: translateX(3px);
+        }
+        
+        .desglose-tab .item-info h4 {
+            font-size: 1rem;
+            color: #0f766e;
+            margin-bottom: 0.4rem;
+            font-weight: 700;
+        }
+        
+        .desglose-tab .item-info p {
+            color: #64748b;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .desglose-tab .item-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #14b8a6;
+            text-align: right;
+            white-space: nowrap;
+        }
+        
+        .desglose-tab .explanation-box {
+            background: #fef3c7;
+            padding: 1.2rem;
+            border-radius: 10px;
+            margin-top: 1.2rem;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .desglose-tab .explanation-box h4 {
+            color: #92400e;
+            margin-bottom: 0.6rem;
+            font-size: 1rem;
+        }
+        
+        .desglose-tab .explanation-box p {
+            color: #78350f;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        
+        .desglose-tab .summary-box {
+            background: linear-gradient(135deg, #f0fdf4, white);
+            border: 3px solid #22c55e;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .desglose-tab .summary-box h3 {
+            color: #0f766e;
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .desglose-tab .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .desglose-tab .summary-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #d1fae5;
+        }
+        
+        .desglose-tab .summary-item h4 {
+            color: #0f766e;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .desglose-tab .summary-item .big-price {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #14b8a6;
+            margin: 0.8rem 0;
+        }
+        
+        .desglose-tab .summary-item p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        .desglose-tab .guarantee-box {
+            background: #dbeafe;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .desglose-tab .guarantee-box h4 {
+            color: #1e40af;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .desglose-tab .guarantee-box p {
+            color: #1e3a8a;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+        
+        .desglose-tab .recommendation-final {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            border: 2px solid #22c55e;
+            text-align: center;
+        }
+        
+        .desglose-tab .recommendation-final h4 {
+            color: #0f766e;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+        
+        .desglose-tab .recommendation-final p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #475569;
+        }
+        
+        @media (max-width: 768px) {
+            .tabs-nav button {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+            .tabs-nav button .tab-icon {
+                font-size: 16px;
+            }
+            .whatsapp-tab {
+                padding: 1rem;
+            }
+            .whatsapp-tab .wa-timeline-steps {
+                flex-direction: column;
+            }
+            .whatsapp-tab .wa-timeline-step::after {
+                content: '↓';
+                right: 50%;
+                top: auto;
+                bottom: -1.5rem;
+                transform: translateX(50%);
+            }
+        }
+        
         @media print {
+            .tabs-container, .tabs-nav {
+                display: none !important;
+            }
+            .tab-content {
+                display: block !important;
+            }
+            .whatsapp-tab {
+                display: none !important;
+            }
             .no-print {
                 display: none;
             }
@@ -411,6 +1093,17 @@
     </style>
 </head>
 <body>
+    <!-- SISTEMA DE PESTAÑAS -->
+    <div class="tabs-container">
+        <ul class="tabs-nav">
+            <li><button class="active" onclick="showTab('web')" id="tab-web"><span class="tab-icon">🌐</span> Desarrollo Web</button></li>
+            <li><button onclick="showTab('whatsapp')" id="tab-whatsapp"><span class="tab-icon">💬</span> WhatsApp & Chatbot</button></li>
+            <li><button onclick="showTab('desglose')" id="tab-desglose"><span class="tab-icon">💰</span> Desglose de Costos</button></li>
+        </ul>
+    </div>
+
+    <!-- PESTAÑA 1: DESARROLLO WEB -->
+    <div id="content-web" class="tab-content active">
     <div class="container">
         <div class="header">
             <div class="company-name">Fezavali SofSol</div>
@@ -625,5 +1318,442 @@
             <p style="font-size: 12px; color: #999; margin-top: 10px;">Gracias por considerar nuestros servicios profesionales.</p>
         </div>
     </div>
+    </div><!-- Fin pestaña desarrollo web -->
+
+    <!-- PESTAÑA 2: WHATSAPP & CHATBOT -->
+    <div id="content-whatsapp" class="tab-content">
+        <div class="whatsapp-tab">
+            <div class="wa-header">
+                <h2>💬 WhatsApp para CECOCQ</h2>
+                <p class="wa-subtitle">Opciones simples para comunicarte mejor con tus pacientes</p>
+            </div>
+
+            <div class="wa-intro">
+                <h3>¿Qué es esto?</h3>
+                <p>Muchos de sus pacientes prefieren escribir por <strong>WhatsApp</strong> antes que llamar. Queremos ayudarles a estar disponibles de la mejor manera posible.</p>
+                <p>Les presentamos <strong>3 opciones</strong>, desde lo más simple (gratis) hasta lo más avanzado (con robot que responde automáticamente). Ustedes deciden qué les funciona mejor.</p>
+            </div>
+
+            <!-- OPCIÓN 1: BOTÓN SIMPLE -->
+            <div class="wa-option">
+                <span class="wa-badge">✅ RECOMENDADO PARA EMPEZAR</span>
+                <div class="wa-option-header">
+                    <div class="wa-icon">📱</div>
+                    <div class="wa-option-title">
+                        <h4>Opción 1: Botón Simple</h4>
+                        <p class="wa-tagline">Ya incluido en su proyecto</p>
+                    </div>
+                </div>
+                <div class="wa-price-box">
+                    <div class="wa-price-main">$0 adicionales</div>
+                    <div class="wa-price-detail">Sin costo mensual • Ya está incluido</div>
+                </div>
+                <h4>✨ ¿Qué incluye?</h4>
+                <ul class="wa-benefits">
+                    <li>Botón verde flotante de WhatsApp en su página web</li>
+                    <li>Cada terapeuta tiene su propio contacto ó se dirige a la asistente</li>
+                    <li>El paciente elige con quién quiere hablar</li>
+                    <li>Funciona en celular, tablet y computadora</li>
+                    <li>Ustedes responden manualmente desde su WhatsApp normal</li>
+                </ul>
+                <div class="wa-analogy">
+                    <p><strong>💡 Imagínenlo como:</strong> Un directorio telefónico moderno. Es como poner 6 números de teléfono en su página, pero en vez de llamar, los pacientes les escriben directamente por WhatsApp con un solo clic.</p>
+                </div>
+            </div>
+
+            <!-- OPCIÓN 2: ASISTENTE VIRTUAL -->
+            <div class="wa-option">
+                <div class="wa-option-header">
+                    <div class="wa-icon">🤖</div>
+                    <div class="wa-option-title">
+                        <h4>Opción 2: Asistente Virtual Básico</h4>
+                        <p class="wa-tagline">Responde automáticamente 24/7</p>
+                    </div>
+                </div>
+                <div class="wa-price-box">
+                    <div class="wa-price-main">$2,500 una vez</div>
+                    <div class="wa-price-detail">+ $600 pesos al mes</div>
+                </div>
+                <h4>✨ ¿Qué incluye?</h4>
+                <ul class="wa-benefits">
+                    <li>Todo lo de la Opción 1</li>
+                    <li>Robot que responde automáticamente de noche y fines de semana</li>
+                    <li>Responde preguntas frecuentes (horarios, ubicación, precios)</li>
+                    <li>Saluda y pregunta en qué puede ayudar</li>
+                    <li>Si es urgente, les transfiere con ustedes</li>
+                    <li>Guarda información de quien escribe (nombre, teléfono)</li>
+                </ul>
+                <div class="wa-analogy">
+                    <p><strong>💡 Imagínenlo como:</strong> Una recepcionista virtual que nunca duerme. Cuando alguien les escribe a las 11pm, el robot responde de inmediato con información básica y les dice que ustedes les responderán en horario de oficina.</p>
+                </div>
+            </div>
+
+            <!-- OPCIÓN 3: ASISTENTE INTELIGENTE IA -->
+            <div class="wa-option">
+                <div class="wa-option-header">
+                    <div class="wa-icon">🧠</div>
+                    <div class="wa-option-title">
+                        <h4>Opción 3: Asistente Inteligente (IA)</h4>
+                        <p class="wa-tagline">Conversa como humano y agenda citas</p>
+                    </div>
+                </div>
+                <div class="wa-price-box">
+                    <div class="wa-price-main">$5,500 una vez</div>
+                    <div class="wa-price-detail">+ $1,200 pesos al mes</div>
+                </div>
+                <h4>✨ ¿Qué incluye?</h4>
+                <ul class="wa-benefits">
+                    <li>Todo lo de la Opción 2</li>
+                    <li>Conversa naturalmente como si fuera una persona</li>
+                    <li>Entiende preguntas complejas sobre terapias</li>
+                    <li>Puede agendar citas automáticamente</li>
+                    <li>Aprende de las conversaciones para mejorar</li>
+                    <li>Recuerda conversaciones anteriores con cada paciente</li>
+                </ul>
+                <div class="wa-analogy">
+                    <p><strong>💡 Imagínenlo como:</strong> Un asistente real muy bien entrenado. Puede tener conversaciones completas, entender si alguien está ansioso o necesita urgencia, y hasta agendar su cita en el calendario sin que ustedes muevan un dedo.</p>
+                </div>
+            </div>
+
+            <!-- COMPARACIÓN RÁPIDA -->
+            <div class="wa-comparison">
+                <h3>📊 Comparación Rápida</h3>
+                <div class="wa-comparison-grid">
+                    <div class="wa-comparison-item highlight">
+                        <h4>Botón Simple</h4>
+                        <div class="big-number">$0</div>
+                        <p>Perfecto si reciben menos de 30 mensajes al mes</p>
+                    </div>
+                    <div class="wa-comparison-item">
+                        <h4>Asistente Virtual</h4>
+                        <div class="big-number">$600</div>
+                        <p style="font-size: 0.8rem; margin-bottom: 0.3rem;">mensuales</p>
+                        <p>Ideal si reciben 50-150 mensajes al mes</p>
+                    </div>
+                    <div class="wa-comparison-item">
+                        <h4>Asistente Inteligente</h4>
+                        <div class="big-number">$1,200</div>
+                        <p style="font-size: 0.8rem; margin-bottom: 0.3rem;">mensuales</p>
+                        <p>Para más de 200 mensajes al mes o automatizar citas</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ -->
+            <div class="wa-faq">
+                <h3>❓ Preguntas Frecuentes</h3>
+                
+                <div class="wa-faq-item">
+                    <h4>¿Necesitamos un número de teléfono nuevo?</h4>
+                    <p><strong>Opción 1 (Botón Simple):</strong> No, usan sus números actuales de WhatsApp.<br>
+                    <strong>Opciones 2 y 3 (Con robot):</strong> Sí, necesitarían un número comercial nuevo para el robot. Nosotros les ayudamos a conseguirlo.</p>
+                </div>
+
+                <div class="wa-faq-item">
+                    <h4>¿Es difícil de usar?</h4>
+                    <p>No. El Botón Simple funciona solo, sin que ustedes hagan nada. Para las opciones con robot, les damos una capacitación de 1 hora y un manual sencillo. Es tan fácil como usar WhatsApp normal.</p>
+                </div>
+
+                <div class="wa-faq-item">
+                    <h4>¿Cuánto tiempo toma instalarlo?</h4>
+                    <p><strong>Botón Simple:</strong> 1 día (se hace junto con su página web)<br>
+                    <strong>Con robot:</strong> 15 días (incluye pruebas y capacitación)</p>
+                </div>
+
+                <div class="wa-faq-item">
+                    <h4>¿Qué pasa si no nos gusta?</h4>
+                    <p>El Botón Simple está incluido sin costo, así que no hay riesgo. Para las opciones con robot, pueden cancelar el servicio mensual cuando quieran (con 30 días de aviso). No hay permanencia forzosa.</p>
+                </div>
+
+                <div class="wa-faq-item">
+                    <h4>¿El robot reemplaza a nuestro personal?</h4>
+                    <p>No. El robot es un <strong>asistente</strong>, no un reemplazo. Contesta lo básico (horarios, ubicación, preguntas frecuentes) pero cuando alguien necesita atención real o tiene una duda compleja, los transfiere con ustedes.</p>
+                </div>
+            </div>
+
+            <!-- TIMELINE -->
+            <div class="wa-timeline">
+                <h3>⏱️ ¿Cómo funciona el proceso?</h3>
+                <div class="wa-timeline-steps">
+                    <div class="wa-timeline-step">
+                        <div class="wa-timeline-number">1</div>
+                        <p>Eligen la opción que prefieren</p>
+                    </div>
+                    <div class="wa-timeline-step">
+                        <div class="wa-timeline-number">2</div>
+                        <p>Nosotros lo instalamos y probamos</p>
+                    </div>
+                    <div class="wa-timeline-step">
+                        <div class="wa-timeline-number">3</div>
+                        <p>Les enseñamos a usarlo (si aplica)</p>
+                    </div>
+                    <div class="wa-timeline-step">
+                        <div class="wa-timeline-number">4</div>
+                        <p>¡Listo para recibir mensajes!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA FINAL -->
+            <div class="wa-cta">
+                <h3>🎯 ¿Qué les recomendamos?</h3>
+                <p>Para un centro como el suyo (6 terapeutas), lo ideal es <strong>comenzar con el Botón Simple</strong> que ya está incluido en su proyecto de $13,000 pesos.</p>
+                <p>Después de 3-6 meses, si ven que reciben muchos mensajes fuera de horario o preguntas repetitivas, entonces consideramos agregar el Asistente Virtual.</p>
+                <p class="highlight-text">Así no gastan de más desde el inicio y solo invierten en lo que realmente necesitan.</p>
+            </div>
+        </div>
+    </div><!-- Fin pestaña WhatsApp -->
+
+    <!-- PESTAÑA 3: DESGLOSE DE COSTOS -->
+    <div id="content-desglose" class="tab-content">
+        <div class="desglose-tab">
+            <div class="desglose-header">
+                <h2>💰 ¿A dónde va cada peso?</h2>
+                <p class="desglose-subtitle">Desglose transparente de costos del Asistente Virtual para WhatsApp</p>
+            </div>
+
+            <!-- OPCIÓN 2: CHATBOT BÁSICO -->
+            <div class="breakdown-card">
+                <h3>🤖 Opción 2: Asistente Virtual Básico</h3>
+                
+                <div class="cost-section">
+                    <div class="section-header">
+                        <div class="section-title">💵 Inversión Inicial (Pago único)</div>
+                        <div class="section-price">$2,500</div>
+                    </div>
+                    
+                    <div class="cost-items">
+                        <div class="cost-item">
+                            <div class="item-info">
+                                <h4>Análisis y Diseño de Conversaciones</h4>
+                                <p>Estudiamos su negocio, identificamos las preguntas más frecuentes de sus pacientes, y diseñamos el flujo de conversación ideal. Incluye reunión con ustedes para entender cómo quieren que "hable" el asistente.</p>
+                            </div>
+                            <div class="item-price">$800</div>
+                        </div>
+
+                        <div class="cost-item">
+                            <div class="item-info">
+                                <h4>Programación del Asistente Virtual</h4>
+                                <p>Configuración técnica completa: menús interactivos, respuestas automáticas, horarios, transferencia a agentes humanos, captura de datos. Son aproximadamente 20 horas de programación especializada.</p>
+                            </div>
+                            <div class="item-price">$1,200</div>
+                        </div>
+
+                        <div class="cost-item">
+                            <div class="item-info">
+                                <h4>Solicitud de WhatsApp Business API</h4>
+                                <p>Trámite con Meta (Facebook) para obtener su cuenta oficial de WhatsApp para empresas. Incluye verificación de negocio y configuración del número comercial.</p>
+                            </div>
+                            <div class="item-price">$300</div>
+                        </div>
+
+                        <div class="cost-item">
+                            <div class="item-info">
+                                <h4>Pruebas y Capacitación</h4>
+                                <p>Testing completo del sistema, corrección de errores, y capacitación de 1 hora para su equipo. Incluye manual de uso en PDF.</p>
+                            </div>
+                            <div class="item-price">$200</div>
+                        </div>
+                    </div>
+
+                    <div class="explanation-box">
+                        <h4>💡 ¿Por qué es inversión única?</h4>
+                        <p>Este pago cubre todo el <strong>desarrollo inicial</strong>. Es como construir una casa: solo se paga una vez. Una vez que está funcionando, solo pagan el "mantenimiento" mensual (que explicamos abajo).</p>
+                    </div>
+                </div>
+
+                <div class="cost-section">
+                    <div class="section-header">
+                        <div class="section-title">📅 Costo Mensual Recurrente</div>
+                        <div class="section-price">$600/mes</div>
+                    </div>
+                    
+                    <div class="cost-items">
+                        <div class="cost-item">
+                            <div class="item-info">
+                                <h4>Plataforma del Chatbot (Tidio o ManyChat)</h4>
+                                <p>El software que hace funcionar el asistente virtual. Es como pagar Netflix: una suscripción mensual al servicio. Sin esto, el robot no puede funcionar.</p>
+                            </div>
+                            <div class="item-price">$300/mes</div>
+                        </div>
+
+                        <div class="cost-item">
+                            <div class="item-info">
+                                <h4>WhatsApp Business API de Meta</h4>
+                                <p>Meta (dueño de WhatsApp) cobra por usar WhatsApp para negocios. El costo varía según cuántos mensajes envíen ustedes (no los que reciben). Estimado para 100 mensajes salientes al mes.</p>
+                            </div>
+                            <div class="item-price">~$200/mes</div>
+                        </div>
+
+                        <div class="cost-item">
+                            <div class="item-info">
+                                <h4>Soporte Técnico y Mantenimiento</h4>
+                                <p>Incluye: actualizaciones del sistema, ajustes a las respuestas, soporte por email, y hasta 2 modificaciones menores al mes (agregar/cambiar respuestas).</p>
+                            </div>
+                            <div class="item-price">$100/mes</div>
+                        </div>
+                    </div>
+
+                    <div class="explanation-box">
+                        <h4>💡 ¿Por qué hay costos mensuales?</h4>
+                        <p>El asistente virtual usa <strong>servicios externos</strong> (software de chatbot + WhatsApp de Meta) que cobran mensualidad. Es como tener internet o teléfono: necesitas pagar cada mes para que siga funcionando. Nosotros manejamos todo por ustedes y solo les cobramos el costo real + nuestro soporte.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OPCIÓN 3: CHATBOT CON IA -->
+            <div class="breakdown-card">
+                <h3>🧠 Opción 3: Asistente Inteligente (IA)</h3>
+                
+                <div class="cost-section">
+                    <div class="section-header">
+                        <div class="section-title">💵 Inversión Inicial (Pago único)</div>
+                        <div class="section-price">$5,500</div>
+                    </div>
+                    
+                    <div class="cost-items">
+                        <div class="cost-item">
+                            <div class="item-info">
+                                <h4>Todo lo de la Opción 2</h4>
+                                <p>Análisis, programación básica, WhatsApp API, pruebas y capacitación.</p>
+                            </div>
+                            <div class="item-price">$2,500</div>
+                        </div>
+
+                        <div class="cost-item">
+                            <div class="item-info">
+                                <h4>Entrenamiento de Inteligencia Artificial</h4>
+                                <p>Programamos un cerebro artificial que entiende contexto y puede tener conversaciones naturales. Le "enseñamos" todo sobre sus terapias, precios, enfoques, y cómo responder empáticamente.</p>
+                            </div>
+                            <div class="item-price">$2,000</div>
+                        </div>
+
+                        <div class="cost-item">
+                            <div class="item-info">
+                                <h4>Integración con Calendario</h4>
+                                <p>Conectamos el asistente con su sistema de citas para que pueda agendar automáticamente (revisa disponibilidad, propone horarios, confirma citas).</p>
+                            </div>
+                            <div class="item-price">$800</div>
+                        </div>
+
+                        <div class="cost-item">
+                            <div class="item-info">
+                                <h4>Testing Avanzado y Capacitación Extendida</h4>
+                                <p>Pruebas exhaustivas de conversaciones complejas y capacitación de 2 horas para que su equipo sepa supervisar y mejorar el asistente.</p>
+                            </div>
+                            <div class="item-price">$200</div>
+                        </div>
+                    </div>
+
+                    <div class="explanation-box">
+                        <h4>💡 ¿Qué hace diferente a la IA?</h4>
+                        <p>La Opción 2 sigue un <strong>menú fijo</strong> (como un cajero automático). La Opción 3 es <strong>inteligente</strong>: entiende preguntas en lenguaje natural, recuerda conversaciones anteriores, y puede razonar para resolver problemas complejos.</p>
+                    </div>
+                </div>
+
+                <div class="cost-section">
+                    <div class="section-header">
+                        <div class="section-title">📅 Costo Mensual Recurrente</div>
+                        <div class="section-price">$1,200/mes</div>
+                    </div>
+                    
+                    <div class="cost-items">
+                        <div class="cost-item">
+                            <div class="item-info">
+                                <h4>Plataforma de IA Conversacional</h4>
+                                <p>Software especializado que hace funcionar la inteligencia artificial. Más potente que las plataformas básicas de chatbot.</p>
+                            </div>
+                            <div class="item-price">$500/mes</div>
+                        </div>
+
+                        <div class="cost-item">
+                            <div class="item-info">
+                                <h4>WhatsApp Business API de Meta</h4>
+                                <p>Estimado para 200 mensajes salientes al mes (más volumen por las funciones avanzadas).</p>
+                            </div>
+                            <div class="item-price">~$300/mes</div>
+                        </div>
+
+                        <div class="cost-item">
+                            <div class="item-info">
+                                <h4>Tokens de Inteligencia Artificial</h4>
+                                <p>La IA usa "tokens" (como combustible) cada vez que piensa y responde. Se paga por el uso de la tecnología de OpenAI/GPT.</p>
+                            </div>
+                            <div class="item-price">~$200/mes</div>
+                        </div>
+
+                        <div class="cost-item">
+                            <div class="item-info">
+                                <h4>Soporte Premium y Mejora Continua</h4>
+                                <p>Supervisión de conversaciones, ajustes al entrenamiento de la IA, reportes mensuales, y soporte prioritario por WhatsApp.</p>
+                            </div>
+                            <div class="item-price">$200/mes</div>
+                        </div>
+                    </div>
+
+                    <div class="explanation-box">
+                        <h4>💡 ¿Cuándo vale la pena la Opción 3?</h4>
+                        <p>La IA es útil si: (1) reciben muchas consultas complejas que requieren respuestas personalizadas, (2) necesitan agendar citas automáticamente sin intervención humana, o (3) quieren que el asistente aprenda y mejore con cada conversación.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESUMEN -->
+            <div class="summary-box">
+                <h3>📊 Resumen de Inversiones</h3>
+                
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <h4>Opción 1: Botón Simple</h4>
+                        <div class="big-price">$0</div>
+                        <p>Ya incluido en su proyecto base</p>
+                    </div>
+                    
+                    <div class="summary-item" style="border-color: #14b8a6;">
+                        <h4>Opción 2: Asistente Virtual</h4>
+                        <div class="big-price">$2,500</div>
+                        <p>Inversión inicial</p>
+                        <div class="big-price" style="font-size: 1.5rem; margin-top: 0.8rem;">$600/mes</div>
+                        <p>Costo operativo</p>
+                    </div>
+                    
+                    <div class="summary-item">
+                        <h4>Opción 3: Asistente con IA</h4>
+                        <div class="big-price">$5,500</div>
+                        <p>Inversión inicial</p>
+                        <div class="big-price" style="font-size: 1.5rem; margin-top: 0.8rem;">$1,200/mes</div>
+                        <p>Costo operativo</p>
+                    </div>
+                </div>
+
+                <div class="guarantee-box">
+                    <h4>💰 Garantía de Transparencia</h4>
+                    <p>Todos estos costos son <strong>reales y justificados</strong>. No hay cargos ocultos. Les mostramos exactamente a dónde va cada peso porque creemos en la honestidad total. Si en algún momento los costos externos bajan (por ejemplo, si Meta reduce precios), les pasamos el ahorro inmediatamente.</p>
+                </div>
+
+                <div class="recommendation-final">
+                    <h4>✅ Nuestra Recomendación</h4>
+                    <p>Para CECOCQ, recomendamos <strong>comenzar con la Opción 1 (Botón Simple - $0)</strong> que ya está incluida. Si después ven que necesitan automatización, pueden agregar la <strong>Opción 2 (Asistente Virtual)</strong> en cualquier momento.</p>
+                </div>
+            </div>
+        </div>
+    </div><!-- Fin pestaña Desglose -->
+
+    <script>
+        function showTab(tabName) {
+            // Ocultar todos los contenidos
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            // Desactivar todos los botones
+            document.querySelectorAll('.tabs-nav button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            // Mostrar contenido seleccionado
+            document.getElementById('content-' + tabName).classList.add('active');
+            // Activar botón seleccionado
+            document.getElementById('tab-' + tabName).classList.add('active');
+        }
+    </script>
 </body>
 </html>
